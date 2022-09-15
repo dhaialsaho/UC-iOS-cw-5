@@ -9,38 +9,38 @@ import SwiftUI
 
 
 
-struct AddFruitView: View {
-    @Binding var array: [String]
-    
-    var body: some View {
-        Button(action: {
-            array.append("Test")
-        }) {
-            Image(systemName: "plus")
-                .font(.largeTitle)
-        }
-    }
-}
+
 
 struct ContentView: View {
-    @State var fruits = ["☹️", "😓", "😡", "🥰", "😃", "🤪", "🥵"]
     
-    @State var selectedFruit = ""
     
+    
+    
+    @State var emojiii = ["☹️", "😓", "😡", "🥰", "😃", "🤪", "🥵"]
+    
+    @State var chosenemoji = ""
+    @State var circlee = ""
     var body: some View {
-        VStack {
-            Text(selectedFruit)
-                .font(.largeTitle)
+        
+        ZStack {
             
-            HorizontalFruitList(
-                fruits: fruits,
-                selectedFruit: $selectedFruit
+        VStack {
+            Text("Choose your mood for the day!")
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+                .padding()
+            Text(chosenemoji)
+                .font(.largeTitle)
+                
+            Horizontalemojis(
+                emojiii: emojiii,
+                chosenemoji: $chosenemoji
             )
             
-            AddFruitView(array: $fruits)
+          
         }
     }
-}
+    }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -48,21 +48,40 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct HorizontalFruitList: View {
-    let fruits: [String]
-    @Binding var selectedFruit: String
+struct Horizontalemojis: View {
+    let emojiii: [String]
+    @Binding var chosenemoji: String
     
     var body: some View {
+        ZStack{
+            
         ScrollView(.horizontal) {
             HStack {
-                ForEach(fruits, id: \.self) { fruit in
+                
+                ForEach(emojiii, id: \.self) { fruit in
+                    dView()
                     Text(fruit)
                         .font(.largeTitle)
                         .onTapGesture {
-                            selectedFruit = fruit
-                        }
+                            chosenemoji = fruit}
+                        
                 }
             }
         }
     }
 }
+}
+struct dView: View {
+    var body: some View {
+        ZStack{
+            Circle()
+                .foregroundColor(.blue)
+                .frame(width: 40, height:40)
+           
+            
+        }
+    }
+}
+
+}
+
